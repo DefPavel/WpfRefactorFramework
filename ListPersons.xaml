@@ -1,0 +1,53 @@
+<Window x:Class="WpfRefactorFramework.ListPersons"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        Loaded="ListPersons_OnLoaded"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Список проживающих" Height="450" Width="600">
+    <Grid>
+        <DataGrid 
+            x:Name="PersonList"
+            SelectionMode="Single"
+            Background="Transparent"
+            IsReadOnly="True"
+            AutoGenerateColumns="False"
+            Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="90"
+                    Header="Фамилия"
+                    Binding="{Binding FirstName}"
+                />
+                <DataGridTextColumn
+                    Width="90"
+                    Header="Имя"
+                    Binding="{Binding SecondName}"
+                />
+                <DataGridTextColumn
+                    Width="90"
+                    Header="Отчество"
+                    Binding="{Binding LastName}"
+                />
+                <DataGridTextColumn
+                    Width="*"
+                    Header="Здание"
+                    Binding="{Binding Building}"
+                />
+                <DataGridTextColumn
+                    Width="*"
+                    Header="Секция"
+                    Binding="{Binding Section}"
+                />
+                <DataGridTextColumn
+                    Width="*"
+                    Header="Комната"
+                    Binding="{Binding Room}"
+                />
+                
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
