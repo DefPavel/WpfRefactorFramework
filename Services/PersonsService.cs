@@ -9,7 +9,7 @@ namespace WpfRefactorFramework.Services
 {
     public static class PersonsService
     {
-        
+        private const string NameHostel = "Общежитие №7";
         private const string StringConnection = "data source=192.168.250.25;initial catalog=univer;persist security info=True;user id=Pavel;password=~Pss~JrY;MultipleActiveResultSets=True;";
 
 
@@ -48,7 +48,7 @@ namespace WpfRefactorFramework.Services
 
         public static async Task<int> GetInnerPersons()
         {
-            var sql = $@"select count(pr.id)   
+            var sql = $@"select count(pr.id)
                         from PersonRooms as pr
                         inner join Propusk P on pr.id = P.idPersonRooms
                         inner join DepartamentsHostel DH on pr.idDepartametHostel = DH.id
@@ -58,7 +58,7 @@ namespace WpfRefactorFramework.Services
                         inner join Section S2 on R2.idSection = S2.id
                         inner join Hostel H on S2.idHostel = H.id
                         inner join Buildings B on H.idBuildings = B.id
-                        where B.name = 'Общежитие №7' and  P.blocked <> 'T' and P.status = 'T' ";
+                        where B.name = '{NameHostel}' and  P.blocked <> 'T' and P.status = 'T' ";
             using var conn = new SqlConnection(StringConnection);
             conn.Open();
             using var command = new SqlCommand(sql, conn);
@@ -78,7 +78,7 @@ namespace WpfRefactorFramework.Services
                         inner join Section S2 on R2.idSection = S2.id
                         inner join Hostel H on S2.idHostel = H.id
                         inner join Buildings B on H.idBuildings = B.id
-                        where B.name = 'Общежитие №7' and  P.blocked <> 'T'";
+                        where B.name = '{NameHostel}' and  P.blocked <> 'T'";
             using var conn = new SqlConnection(StringConnection);
             conn.Open();
             using var command = new SqlCommand(sql, conn);
@@ -99,7 +99,7 @@ namespace WpfRefactorFramework.Services
                         inner join Section S2 on R2.idSection = S2.id
                         inner join Hostel H on S2.idHostel = H.id
                         inner join Buildings B on H.idBuildings = B.id
-                        where B.name = 'Общежитие №7' and  P.blocked <> 'T' and P.status = 'F' ";
+                        where B.name = '{NameHostel}' and  P.blocked <> 'T' and P.status = 'F' ";
             using var conn = new SqlConnection(StringConnection);
             conn.Open();
             using var command = new SqlCommand(sql, conn);
@@ -121,7 +121,7 @@ namespace WpfRefactorFramework.Services
                         inner join Section S2 on R2.idSection = S2.id
                         inner join Hostel H on S2.idHostel = H.id
                         inner join Buildings B on H.idBuildings = B.id
-                        where B.name = 'Общежитие №7'";
+                        where B.name = '{NameHostel}'";
 
             using var conn = new SqlConnection(StringConnection);
             conn.Open();
@@ -164,7 +164,7 @@ namespace WpfRefactorFramework.Services
                         inner join Section S2 on R2.idSection = S2.id
                         inner join Hostel H on S2.idHostel = H.id
                         inner join Buildings B on H.idBuildings = B.id
-                        where B.name = 'Общежитие №7' and P.numberPropusk = '{code}'";
+                        where B.name = '{NameHostel}' and P.numberPropusk = '{code}'";
 
             using var conn = new SqlConnection(StringConnection);
             conn.Open();
@@ -197,7 +197,7 @@ namespace WpfRefactorFramework.Services
         public static async Task<IEnumerable<Move>> GetMove()
         {
             var array = new List<Move>();
-            const string sql = @"select top 200 S.surname, S.name as secondName, S.patronymic , M.DateTimeMove , M.TypeStatus , B.name as build, S2.nameSection, R2.numberRoom 
+             var sql = $@"select top 200 S.surname, S.name as secondName, S.patronymic , M.DateTimeMove , M.TypeStatus , B.name as build, S2.nameSection, R2.numberRoom 
                     from PersonRooms as pr
                     inner join Propusk P on pr.id = P.idPersonRooms
                     inner join DepartamentsHostel DH on pr.idDepartametHostel = DH.id
@@ -208,7 +208,7 @@ namespace WpfRefactorFramework.Services
                     inner join Section S2 on R2.idSection = S2.id
                     inner join Hostel H on S2.idHostel = H.id
                     inner join Buildings B on H.idBuildings = B.id
-                    where B.name = 'Общежитие №7'
+                    where B.name = '{NameHostel}'
                     order by  M.DateTimeMove desc";
             using var conn = new SqlConnection(StringConnection);
             conn.Open();

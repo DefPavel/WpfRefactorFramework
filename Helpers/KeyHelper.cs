@@ -7,7 +7,7 @@ namespace WpfRefactorFramework.Helpers
 {
     public sealed class KeyHelper
     {
-         private const int WmKeydown = 0x100;
+        private const int WmKeydown = 0x100;
         private const int WmKeyup = 0x101;
         private const int WmSyskeydown = 0x104;
         private const int WmSyskeyup = 0x105;
@@ -52,7 +52,7 @@ namespace WpfRefactorFramework.Helpers
         {
             var objCurrentModule = Process.GetCurrentProcess().MainModule;
             _keyboardProcess = CaptureKey;
-            _ptrHook = SetWindowsHookEx(13, _keyboardProcess, GetModuleHandle(objCurrentModule.ModuleName), 0);
+            _ptrHook = SetWindowsHookEx(13, _keyboardProcess, GetModuleHandle(objCurrentModule?.ModuleName), 0);
         }
 
         private void Unhook()
